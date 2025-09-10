@@ -6,47 +6,48 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.beans.factory.annotation.Value;
 import javax.sql.DataSource;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 @Configuration
 public class DataSourceConfig {
 
-    @Value("${SPRING_DATASOURCE_URL:#{null}}")
+    @Value("${SPRING_DATASOURCE_URL:${DATABASE_URL:#{null}}}")
     private String databaseUrl;
 
     @Bean
     @Primary
     public DataSource dataSource() {
         try {
-            // Verifica se a variável de ambiente está definida
             if (databaseUrl == null || databaseUrl.isEmpty()) {
-                throw new RuntimeException("SPRING_DATASOURCE_URL não está definida");
+                throw new RuntimeException("Database URL não está definida");
             }
 
             System.out.println("Database URL recebida: " + databaseUrl);
 
-            // Parse da URL
-            URI dbUri = new URI(databaseUrl);
+            // Para Render, construir manualmente baseado na URL fornecida
+            // postgresql://pao_db_user:IjK8KP2zCXSAdkMDruV4uHAHkXeUVaBc@dpg-d30vo8h5pdvs73edpi00-a/pao_db
 
-            // Validações
-            if (dbUri.getUserInfo() == null) {
-                throw new RuntimeException("UserInfo não encontrado na URL");
-            }
+            // Extrair informações manualmente
+            String url = databaseUrl;
+            url = url.replace("postgresql://", "").replace("postgres://", "");
 
-            String[] userInfo = dbUri.getUserInfo().split(":");
-            if (userInfo.length != 2) {
-                throw new RuntimeException("Formato de UserInfo inválido");
-            }
+            String[] parts = url.split("@");
+            String userInfo = parts[0]; // username:password
+            String hostAndDb = parts[1]; // host/database
 
-            String username = userInfo[0];
-            String password = userInfo[1];
+            String[] userParts = userInfo.split(":");
+            String username = userParts[0];
+            String password = userParts[1];
 
-            // Constrói a URL JDBC
-            String jdbcUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
+            String[] hostParts = hostAndDb.split("/");
+            String host = hostParts[0];
+            String database = hostParts[1];
 
-            System.out.println("JDBC URL construída: " + jdbcUrl);
+            // Construir URL JDBC para Render
+            String jdbcUrl = "jdbc:postgresql://" + host + ".oregon-postgres.render.com:5432/" + database;
+
+            System.out.println("JDBC URL: " + jdbcUrl);
             System.out.println("Username: " + username);
+            System.out.println("Database: " + database);
 
             return DataSourceBuilder.create()
                     .url(jdbcUrl)
@@ -55,11 +56,9 @@ public class DataSourceConfig {
                     .driverClassName("org.postgresql.Driver")
                     .build();
 
-        } catch (URISyntaxException e) {
-            System.err.println("Erro ao fazer parse da URL: " + e.getMessage());
-            throw new RuntimeException("URL do banco de dados inválida", e);
         } catch (Exception e) {
             System.err.println("Erro na configuração do DataSource: " + e.getMessage());
+            e.printStackTrace();
             throw new RuntimeException("Falha ao configurar DataSource", e);
         }
     }
