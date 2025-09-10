@@ -10,9 +10,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Aplica a todos os endpoints
-                .allowedOrigins("*") // Permite o seu frontend
+                .allowedOrigins("*") // Permite qualquer origem
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos permitidos
                 .allowedHeaders("*")
-                .allowCredentials(true);
+                .allowCredentials(false); // Mudou para false
     }
 }
