@@ -28,6 +28,8 @@ public class PaoService {
             novoPao.setSaldo(0);
             novoPao.setMultiplicador(1);
             novoPao.setPaoPorSegundo(0);
+            novoPao.setCustoPadeiro(250);
+            novoPao.setUltimaAtualizacao(LocalDateTime.now());
             return paoRepository.save(novoPao);
         }
     }
@@ -61,6 +63,10 @@ public class PaoService {
     public Pao cliqueAutomatico() {
         Pao pao = verificarPao();
         int custoPadeiro = pao.getCustoPadeiro();
+        if (custoPadeiro == 0) {
+            custoPadeiro = 250;
+            pao.setCustoPadeiro(custoPadeiro);
+        }
         if (pao.getCustoPadeiro() > 250){
             pao.setCustoPadeiro(250);
         }
