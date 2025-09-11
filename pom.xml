@@ -13,11 +13,21 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>pao-que-clica</name>
     <description>API para o jogo Pão que Clica</description>
+
     <properties>
         <java.version>17</java.version>
         <spring-cloud-gcp.version>5.2.1</spring-cloud-gcp.version>
         <spring-cloud.version>2023.0.1</spring-cloud.version>
+
+        <!-- ====== CORREÇÃO PRINCIPAL AQUI ====== -->
+        <!-- Força o Maven a usar a codificação UTF-8 para ler e escrever arquivos. -->
+        <!-- Isso resolve o erro 'MalformedInputException'. -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- ======================================= -->
+
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
