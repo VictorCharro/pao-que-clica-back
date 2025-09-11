@@ -19,6 +19,9 @@ public class Pao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
+    private String userId;
+
     @Column(name = "saldo")
     int saldo;
 
