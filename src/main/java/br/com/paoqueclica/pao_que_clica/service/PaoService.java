@@ -58,6 +58,7 @@ public class PaoService {
         pao.setMultiplicador(1);
         pao.setSaldo(0);
         pao.setPaoPorSegundo(0);
+        pao.setCustoPadeiro(250);
         return paoRepository.save(pao);
     }
 
