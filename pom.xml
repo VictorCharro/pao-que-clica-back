@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.8</version> <!-- Use a versão mais recente ou a que seu projeto iniciou -->
+        <version>3.2.8</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.paoqueclica</groupId>
@@ -72,8 +72,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
-            <!-- ====== ESTA É A CORREÇÃO IMPORTANTE ====== -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -88,19 +86,7 @@
                     </nonFilteredFileExtensions>
                 </configuration>
             </plugin>
-            <!-- ============================================== -->
-
         </plugins>
     </build>
 </project>
-        ```
-
-        **2. Envie para o GitHub (O Passo Crucial)**
-
-        Agora, vamos ter certeza de que a alteração chegue ao GitHub. Abra o terminal na pasta do seu projeto backend e execute os seguintes comandos, um de cada vez:
-
-        ```bash
-        git add pom.xml
-        git commit -m "Fix: Atualiza pom.xml com configuração do resources plugin"
-        git push
 
