@@ -69,7 +69,7 @@ public class PaoService {
             custoPadeiro = 250;
             pao.setCustoPadeiro(custoPadeiro);
         }
-        if (pao.getCustoPadeiro() > 250){
+        if (pao.getCustoPadeiro() < 250){
             pao.setCustoPadeiro(250);
         }
         else {pao.setCustoPadeiro((int) (pao.getCustoPadeiro() * 1.5));}
