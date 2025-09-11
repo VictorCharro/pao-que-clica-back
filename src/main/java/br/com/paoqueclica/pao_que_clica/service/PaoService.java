@@ -75,7 +75,7 @@ public class PaoService {
 
         if (pao.getSaldo() >= custoPadeiro) {
             pao.setSaldo(pao.getSaldo() - custoPadeiro);
-            pao.setPaoPorSegundo(pao.getPaoPorSegundo() + pao.getMultiplicador());
+            pao.setPaoPorSegundo(pao.getPaoPorSegundo() + 1);
 
             return paoRepository.save(pao);
         }
