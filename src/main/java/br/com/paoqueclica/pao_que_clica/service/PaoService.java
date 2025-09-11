@@ -15,8 +15,8 @@ public class PaoService {
     @Autowired
     private PaoRepository paoRepository;
 
-    public Pao verificarPao(){
-        Optional<Pao> verificado = paoRepository.findById(1L);
+    public Pao verificarPao(String userId){
+        Optional<Pao> verificado = paoRepository.findByUserId(userId);
 
         if (verificado.isPresent()){
             Pao paoExistente = verificado.get();
@@ -25,6 +25,7 @@ public class PaoService {
         }
         else {
             Pao novoPao = new Pao();
+            novoPao.setUserId(userId);
             novoPao.setSaldo(0);
             novoPao.setMultiplicador(1);
             novoPao.setPaoPorSegundo(0);
@@ -34,15 +35,15 @@ public class PaoService {
         }
     }
 
-    public Pao clique(){
-        Pao pao = verificarPao();
+    public Pao clique(String userId){
+        Pao pao = verificarPao(userId);
         int ganhos = pao.getMultiplicador();
         pao.setSaldo(pao.getSaldo() + ganhos);
         return paoRepository.save(pao);
     }
 
-    public Pao upgrade1() {
-        Pao pao = verificarPao();
+    public Pao upgrade1(String userId) {
+        Pao pao = verificarPao(userId);
         int custoUpgrade1 = (pao.getMultiplicador() * 50);
         if (pao.getSaldo() >= custoUpgrade1) {
             pao.setSaldo(pao.getSaldo() - custoUpgrade1);
@@ -52,16 +53,16 @@ public class PaoService {
         return pao;
     }
 
-    public Pao reset() {
-        Pao pao = verificarPao();
+    public Pao reset(String userId) {
+        Pao pao = verificarPao(userId);
         pao.setMultiplicador(1);
         pao.setSaldo(0);
         pao.setPaoPorSegundo(0);
         return paoRepository.save(pao);
     }
 
-    public Pao cliqueAutomatico() {
-        Pao pao = verificarPao();
+    public Pao cliqueAutomatico(String userId) {
+        Pao pao = verificarPao(userId);
         int custoPadeiro = pao.getCustoPadeiro();
         if (custoPadeiro == 0) {
             custoPadeiro = 250;
