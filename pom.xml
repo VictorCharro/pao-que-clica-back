@@ -24,6 +24,7 @@
         <!-- Isso resolve o erro 'MalformedInputException'. -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <!-- ======================================= -->
 
     </properties>
@@ -87,6 +88,9 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.3.1</version>
                 <configuration>
+                    <!-- ====== CONFIGURAÇÃO ADICIONADA ====== -->
+                    <encoding>UTF-8</encoding>
+                    <!-- ======================================= -->
                     <nonFilteredFileExtensions>
                         <nonFilteredFileExtension>png</nonFilteredFileExtension>
                         <nonFilteredFileExtension>jpg</nonFilteredFileExtension>
@@ -99,4 +103,3 @@
         </plugins>
     </build>
 </project>
-
