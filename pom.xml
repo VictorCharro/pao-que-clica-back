@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.8</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>br.com.paoqueclica</groupId>
     <artifactId>pao-que-clica</artifactId>
@@ -16,16 +16,12 @@
 
     <properties>
         <java.version>17</java.version>
-        <spring-cloud-gcp.version>5.2.1</spring-cloud-gcp.version>
-        <spring-cloud.version>2023.0.1</spring-cloud.version>
 
-        <!-- ====== CORREÇÃO PRINCIPAL AQUI ====== -->
-        <!-- Força o Maven a usar a codificação UTF-8 para ler e escrever arquivos. -->
-        <!-- Isso resolve o erro 'MalformedInputException'. -->
+        <!-- ======================================================= -->
+        <!-- ESTA É A CORREÇÃO CRUCIAL PARA O ERRO DE CODIFICAÇÃO -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <!-- ======================================= -->
+        <!-- ======================================================= -->
 
     </properties>
 
@@ -48,46 +44,25 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>com.google.cloud</groupId>
-            <artifactId>spring-cloud-gcp-starter-sql-postgresql</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.cloud</groupId>
-                <artifactId>spring-cloud-gcp-dependencies</artifactId>
-                <version>${spring-cloud-gcp.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
-
 </project>
+        ```
+
+        **2. Envie para o GitHub:**
+
+        Agora, o passo mais importante. Salve o `pom.xml` e envie a alteração para o seu repositório do GitHub. No terminal, na pasta do seu projeto, execute:
+
+        ```bash
+        git add pom.xml
+        git commit -m "Fix: Força a codificação UTF-8 no build do Maven"
+        git push
+
