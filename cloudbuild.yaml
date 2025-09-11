@@ -1,0 +1,7 @@
+# Este arquivo diz ao Google Cloud Build exatamente o que fazer.
+steps:
+  # O único passo que precisamos é executar o comando 'gcloud app deploy'.
+  # Usamos a imagem oficial do Google Cloud SDK que já tem o gcloud instalado.
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: ['app', 'deploy']

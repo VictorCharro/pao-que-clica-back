@@ -1,0 +1,7 @@
+# app.yaml na raiz do projeto pao-que-clica-back
+runtime: java17 # Ou java21, dependendo da versão que você usou
+instance_class: F1 # A classe de instância mais básica e gratuita
+
+# Ativa o Cloud SQL
+beta_settings:
+  cloud_sql_instances: primal-asset-471800-m6:us-central1:pao-que-clica-db
