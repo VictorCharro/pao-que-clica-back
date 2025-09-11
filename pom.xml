@@ -50,13 +50,3 @@
         </plugins>
     </build>
 </project>
-        ```
-
-        **2. Envie para o GitHub**
-
-        Execute os comandos no seu terminal para garantir que a versão limpa seja enviada:
-        ```bash
-        git add pom.xml
-        git commit -m "Fix: Limpeza final do pom.xml para corrigir erro de parse"
-        git push
-
