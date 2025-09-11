@@ -1,7 +1,14 @@
 # Este arquivo diz ao Google Cloud Build exatamente o que fazer.
 steps:
   # O único passo que precisamos é executar o comando 'gcloud app deploy'.
-  # Usamos a imagem oficial do Google Cloud SDK que já tem o gcloud instalado.
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args: ['app', 'deploy']
+
+# --- CORREÇÃO PRINCIPAL AQUI ---
+# Adicionamos esta seção de opções para resolver o erro de permissão.
+options:
+  # Esta linha diz ao Cloud Build para enviar os logs diretamente para o
+  # Cloud Logging, em vez de tentar salvá-los em um bucket de armazenamento separado.
+  logging: CLOUD_LOGGING_ONLY
+
