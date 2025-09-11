@@ -16,13 +16,8 @@
 
     <properties>
         <java.version>17</java.version>
-
-        <!-- ======================================================= -->
-        <!-- ESTA É A CORREÇÃO CRUCIAL PARA O ERRO DE CODIFICAÇÃO -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- ======================================================= -->
-
     </properties>
 
     <dependencies>
@@ -57,12 +52,11 @@
 </project>
         ```
 
-        **2. Envie para o GitHub:**
+        **2. Envie para o GitHub**
 
-        Agora, o passo mais importante. Salve o `pom.xml` e envie a alteração para o seu repositório do GitHub. No terminal, na pasta do seu projeto, execute:
-
+        Execute os comandos no seu terminal para garantir que a versão limpa seja enviada:
         ```bash
         git add pom.xml
-        git commit -m "Fix: Força a codificação UTF-8 no build do Maven"
+        git commit -m "Fix: Limpeza final do pom.xml para corrigir erro de parse"
         git push
 
