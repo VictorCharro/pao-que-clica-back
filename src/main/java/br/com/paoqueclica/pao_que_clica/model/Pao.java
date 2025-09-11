@@ -31,7 +31,11 @@ public class Pao {
     @Column(name = "pao_por_segundo")
     private Integer paoPorSegundo;
 
+    @Column(name = "custo_padeiro")
     private int custoPadeiro;
+
+    @Column(name = "custo_forno")
+    private int custoForno;
 
     private LocalDateTime ultimaAtualizacao;
 }

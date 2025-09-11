@@ -4,6 +4,7 @@ import br.com.paoqueclica.pao_que_clica.model.Pao;
 import br.com.paoqueclica.pao_que_clica.service.PaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/pao")
+@CrossOrigin(origins = "*")
 public class PaoController {
 
     @Autowired
@@ -38,6 +40,12 @@ public class PaoController {
     @PostMapping("/cliqueAutomatico")
     public ResponseEntity<Pao> cliqueAutomatico(@RequestHeader("X-User-ID") String userId){
         Pao atualizado = paoService.cliqueAutomatico(userId);
+        return ResponseEntity.ok(atualizado);
+    }
+
+    @PostMapping("/comprarForno")
+    public ResponseEntity<Pao> comprarForno(@RequestHeader("X-User-ID") String userId){
+        Pao atualizado = paoService.comprarForno(userId);
         return ResponseEntity.ok(atualizado);
     }
 

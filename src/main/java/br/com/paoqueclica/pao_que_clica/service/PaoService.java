@@ -30,6 +30,7 @@ public class PaoService {
             novoPao.setMultiplicador(1);
             novoPao.setPaoPorSegundo(0);
             novoPao.setCustoPadeiro(250);
+            novoPao.setCustoForno(1000);
             novoPao.setUltimaAtualizacao(LocalDateTime.now());
             return paoRepository.save(novoPao);
         }
@@ -59,6 +60,7 @@ public class PaoService {
         pao.setSaldo(0);
         pao.setPaoPorSegundo(0);
         pao.setCustoPadeiro(250);
+        pao.setCustoForno(1000);
         return paoRepository.save(pao);
     }
 
@@ -96,6 +98,18 @@ public class PaoService {
         }
         // Atualiza o timestamp para o momento atual
         pao.setUltimaAtualizacao(LocalDateTime.now());
+        return pao;
+    }
+
+    public Pao comprarForno(String userId) {
+        Pao pao = verificarPao(userId);
+
+        if (pao.getSaldo() >= pao.getCustoForno()){
+            pao.setSaldo(pao.getSaldo() - pao.getCustoForno());
+            pao.setPaoPorSegundo(pao.getPaoPorSegundo() + 5);
+            pao.setCustoForno((int) (pao.getCustoForno() * 1.8));
+            return paoRepository.save(pao);
+        }
         return pao;
     }
 }
